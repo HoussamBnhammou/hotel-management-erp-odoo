@@ -1,0 +1,167 @@
+<odoo>
+    <data>
+        <menuitem id="amoa_menu_root" name="AMOA GRH" sequence="7"/>
+
+<!--        <menuitem id="menu_main" name="Innovation RH" sequence="2" parent="amoa_menu_root"/>-->
+
+
+        <record id="action_employee" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">prof.zaouia.employee</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_employee" name="Employees" action="action_employee" parent="amoa_menu_root" sequence="2"/>
+
+        <record id="action_nationality" model="ir.actions.act_window">
+            <field name="name">Nationalities</field>
+            <field name="res_model">prof.zaouia.nationality</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_nationality" name="Nationalities" action="action_nationality" parent="amoa_menu_root" sequence="3"/>
+
+        <record id="action_specialization" model="ir.actions.act_window">
+            <field name="name">Specializations</field>
+            <field name="res_model">prof.zaouia.specialization</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_specialization" name="Specializations" action="action_specialization" parent="amoa_menu_root" sequence="4"/>
+
+
+        <!-- Employees tree view -->
+        <record id="employee_tree" model="ir.ui.view">
+            <field name="name">Employees</field>
+            <field name="model">prof.zaouia.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employees">
+                    <field name="name"/>
+                    <field name="prenom"/>
+                    <field name="nombre_jours"/>
+                    <field name="periode"/>
+                    <field name="salaire_net"/>
+                    <field name="cnss_afp"/>
+                    <field name="cnss_amop"/>
+                    <field name="cimrp"/>
+                    <field name="irp"/>
+                    <field name="specializations"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Nationalities tree view -->
+        <record id="nationality_tree" model="ir.ui.view">
+            <field name="name">Nationalities</field>
+            <field name="model">prof.zaouia.nationality</field>
+            <field name="arch" type="xml">
+                <tree string="Nationalities">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Specializations tree view -->
+        <record id="nationality_tree" model="ir.ui.view">
+            <field name="name">Specializations</field>
+            <field name="model">prof.zaouia.specialization</field>
+            <field name="arch" type="xml">
+                <tree string="Specializations">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Employee form view -->
+        <record id="employee_form" model="ir.ui.view">
+            <field name="name">Employee</field>
+            <field name="model">prof.zaouia.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+                    <header>
+                    <button string="Cancel" type="object" name="cancel_button" attrs="{'invisible': [('state', '=', 'cancelled')]}"/>
+                    <button string="Recruit" type="object" name="recruit_button" attrs="{'invisible': [('state', '=', 'recruited')]}" groups="prof_zaouia.group_prof_zaouia_manager"/>
+                    <button string="Set to Draft" type="object" name="draft_button" attrs="{'invisible': [('state', '=', 'draft')]}" groups="prof_zaouia.group_prof_zaouia_manager"/>
+                      <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                      <label for="name"/>
+                      <field name="name"/>
+                      <field name="image" widget="image"/>
+
+                        <group colspan="2" col="4">
+                          <group colspan="2" col="2">
+                              <separator string="Données générales" colspan="2"/>
+                                <field name="prenom"/>
+                                <field name="situation"/>
+                                <field name="nombre_jours"/>
+								<field name="charge"/>
+								<field name="periode"/>
+                          </group>
+                          <group colspan="2" col="2">
+                              <separator string="Salaires" colspan="2"/>
+                              <field name="salaire_brutm"/>
+                              <field name="salaire_bdu"/>
+                              <field name="salaire_net"/>
+                          </group>
+
+                          <notebook colspan="4">
+                              <page string="CNSS AF">
+                                   <field name="cnss_afp"/>
+                              </page>
+                              <page string="CNSS AMO">
+                                   <field name="cnss_amop"/>
+                              </page>
+                              <page string="CIMR">
+                                  <field name="cimrp"/>
+                              </page>
+                              <page string="Impôt Revenu">
+                                  <field name="irp"/>
+                              </page>
+                              <page string="Métier">
+                                  <field name="specializations"/>
+                              </page>
+                              <page string="Nationalité">
+                                  <field name="nationality"/>
+                              </page>
+
+                          </notebook>
+                      </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Nationality form view -->
+        <record id="nationality_form" model="ir.ui.view">
+            <field name="name">Nationality</field>
+            <field name="model">prof.zaouia.nationality</field>
+            <field name="arch" type="xml">
+                <form string="Nationality">
+                    <sheet>
+                      <group>
+                        <field name="name"/>
+                      </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Specialization form view -->
+        <record id="specialization_form" model="ir.ui.view">
+            <field name="name">Specialization</field>
+            <field name="model">prof.zaouia.specialization</field>
+            <field name="arch" type="xml">
+                <form string="Specialization">
+                    <sheet>
+                      <group>
+                        <field name="name"/>
+                      </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
