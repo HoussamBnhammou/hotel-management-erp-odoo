@@ -1,0 +1,179 @@
+<odoo>
+  <data>
+    <menuitem id="hotel_menu_root" name="Hotel Management" sequence="7"/>
+
+        <record id="action_reservation" model="ir.actions.act_window">
+            <field name="name">Reservations</field>
+            <field name="res_model">roombooking</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_reservations" name="reservations" action="action_reservation" parent="hotel_menu_root" sequence="2"/>
+    <!-- explicit list view definition -->
+       <record id="reservation-tree" model="ir.ui.view">
+            <field name="name">RoomBooking</field>
+            <field name="model">roombooking</field>
+            <field name="arch" type="xml">
+                <tree string="rooms">
+                    <field name="booking_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+
+       <record id="action_room" model="ir.actions.act_window">
+            <field name="name">room</field>
+            <field name="res_model">room</field>
+            <field name="view_mode">tree,form</field>
+       </record>
+       <menuitem id="menu_room" name="room" action="action_room" parent="hotel_menu_root" sequence="4"/>
+    <!-- explicit list view definition -->
+       <record id="room_tree" model="ir.ui.view">
+            <field name="name">room</field>
+            <field name="model">room</field>
+            <field name="arch" type="xml">
+                <tree string="rooms">
+                    <field name="room_number"/>
+                    <field name="room_type"/>
+                    <field name="room_status"/>
+                    <field name="price_per_night"/>
+                </tree>
+            </field>
+        </record>
+
+
+      <record id="action_clients" model="ir.actions.act_window">
+            <field name="name">client</field>
+            <field name="res_model">client</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_client" name="client" action="action_clients" parent="hotel_menu_root" sequence="6"/>
+    <!-- explicit list view definition -->
+       <record id="client_tree" model="ir.ui.view">
+            <field name="name">client</field>
+            <field name="model">client</field>
+            <field name="arch" type="xml">
+                <tree string="clients">
+                    <field name="name"/>
+                    <field name="adress"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+                <record id="reservation_form" model="ir.ui.view">
+                    <field name="name">reservation</field>
+                    <field name="model">roombooking</field>
+                    <field name="arch" type="xml">
+                        <form string="reservation">
+                            <header>
+                            <button string="Cancel" type="object" name="cancel_button" attrs="{'invisible': [('state', '=', 'cancelled')]}"/>
+                            <button string="Recruit" type="object" name="recruit_button" attrs="{'invisible': [('state', '=', 'recruited')]}" />
+                            <button string="Set to Draft" type="object" name="draft_button" attrs="{'invisible': [('state', '=', 'draft')]}" />
+                              <field name="state" widget="statusbar"/>
+                            </header>
+
+                             <group colspan="2" col="4">
+                                  <group colspan="2" col="2">
+                                      <separator string="personal info" colspan="2"/>
+                                        <field name="booking_id"/>
+                                        <field name="checkInDate"/>
+                                        <field name="checkoutDate"/>
+                                        <field name="responsables"/>
+                                  </group>
+                                  <group colspan="2" col="2">
+                                      <separator string="departement" colspan="2"/>
+                                      <field name="payement_status"/>
+                                      <field name="totale_amount"/>
+                                      <field name="rooms"/>
+                                      <field name="client_id"/>
+                                  </group>
+                                 </group>
+
+                        </form>
+                    </field>
+                </record>
+
+
+
+
+                <record id="room_form" model="ir.ui.view">
+                    <field name="name">rooms</field>
+                    <field name="model">room</field>
+                    <field name="arch" type="xml">
+                        <form string="rooms">
+                            <header>
+                            <button string="Cancel" type="object" name="cancel_button" attrs="{'invisible': [('state', '=', 'cancelled')]}"/>
+                            <button string="Recruit" type="object" name="recruit_button" attrs="{'invisible': [('state', '=', 'recruited')]}" />
+                            <button string="Set to Draft" type="object" name="draft_button" attrs="{'invisible': [('state', '=', 'draft')]}" />
+                              <field name="state" widget="statusbar"/>
+                            </header>
+
+                             <group colspan="2" col="4">
+                                  <group colspan="2" col="2">
+                                      <separator string="personal info" colspan="2"/>
+                                        <field name="price_per_night"/>
+                                        <field name="availability"/>
+                                        <field name="room_status"/>
+                                        <field name="roombooking_id"/>
+                                  </group>
+                                  <group colspan="2" col="2">
+                                      <separator string="room_type" colspan="2"/>
+                                      <field name="room_number"/>
+                                  </group>
+                                 </group>
+
+                        </form>
+                    </field>
+                </record>
+
+
+
+                <record id="clients" model="ir.ui.view">
+                    <field name="name">client</field>
+                    <field name="model">client</field>
+                    <field name="arch" type="xml">
+                        <form string="clients">
+                            <header>
+                            <button string="Cancel" type="object" name="cancel_button" attrs="{'invisible': [('state', '=', 'cancelled')]}"/>
+                            <button string="Recruit" type="object" name="recruit_button" attrs="{'invisible': [('state', '=', 'recruited')]}" />
+                            <button string="Set to Draft" type="object" name="draft_button" attrs="{'invisible': [('state', '=', 'draft')]}" />
+                              <field name="state" widget="statusbar"/>
+                            </header>
+
+                             <group colspan="2" col="4">
+                                  <group colspan="2" col="2">
+                                      <separator string="personal info" colspan="2"/>
+                                        <field name="name"/>
+                                        <field name="adress"/>
+                                        <field name="phone"/>
+                                  </group>
+                                  <group colspan="2" col="2">
+                                      <separator string="room_type" colspan="2"/>
+                                      <field name="email"/>
+                                      <field name="roombooking"/>
+                                  </group>
+                                 </group>
+
+                        </form>
+                    </field>
+                </record>
+
+
+
+
+
+
+  </data>
+</odoo>
